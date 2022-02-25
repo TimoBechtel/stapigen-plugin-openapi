@@ -1,6 +1,6 @@
 {
 	"name": "stapigen-plugin-openapi",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"description": "stapigen plugin that generates OpenAPI 3 definitions",
 	"repository": "git@github.com:TimoBechtel/stapigen-plugin-openapi.git",
 	"author": "Timo Bechtel",
