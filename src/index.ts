@@ -45,10 +45,13 @@ function createPaths(collections: Collection[]): OpenAPIV3.Document['paths'] {
 	collections.forEach((collection) => {
 		if (collection.entrypoint) {
 			// remove first or last slash
-			const basePath = collection.path.replace(/^\/|\/$/g, '');
+			let basePath = collection.path.replace(/^\/|\/$/g, '');
+
+			// add leading slash if not empty
+			if (basePath) basePath = `/${basePath}`;
 
 			// get all
-			paths[`/${basePath}/index.json`] = {
+			paths[`${basePath}/index.json`] = {
 				summary: 'Get all items',
 				get: {
 					responses: {
@@ -60,7 +63,7 @@ function createPaths(collections: Collection[]): OpenAPIV3.Document['paths'] {
 			};
 
 			// get by id
-			paths[`/${basePath}/{id}.json`] = {
+			paths[`${basePath}/{id}.json`] = {
 				get: {
 					summary: 'Get a single item',
 					parameters: [
