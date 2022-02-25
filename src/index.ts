@@ -1,3 +1,4 @@
+import * as fs from 'fs';
 import { OpenAPIV3 } from 'openapi-types';
 import { Collection } from 'stapigen/dist/collectionGenerator';
 import { createFileWriter } from 'stapigen/dist/fileWriter';
@@ -25,6 +26,9 @@ export default function pluginOpenAPI(options: PluginOptions): Plugin {
 					...options.spec,
 					paths: createPaths(collections),
 				};
+
+				// create directory if it doesn't exist
+				fs.mkdirSync(options.dir, { recursive: true });
 
 				await write(options.dir, {
 					data: spec as any,
